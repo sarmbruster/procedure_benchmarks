@@ -14,10 +14,13 @@ repositories {
 }
 
 ext {
-    neo4jVersion = "3.1.7"
+//    neo4jVersion = "3.1.7"
+    neo4jVersion = "3.3.3"
+//    neo4jVersion = "3.4.0-alpha07"
 }
 
 dependencies {
+    compile group: 'org.neo4j', name: 'neo4j-enterprise', version: neo4jVersion
     compile group: 'org.neo4j', name: 'neo4j-kernel', version: neo4jVersion
     compile group: 'org.neo4j', name: 'neo4j-lucene-index', version: neo4jVersion
     compile group: 'org.neo4j', name: 'neo4j-cypher', version: neo4jVersion
@@ -46,9 +49,9 @@ test {
 
 
 jmh {
-//    include = ['some regular expression'] // include pattern (regular expression) for benchmarks to be executed
+//    include = ['MultiFunctionBenchmarkState'] // include pattern (regular expression) for benchmarks to be executed
 //    exclude = ['some regular expression'] // exclude pattern (regular expression) for benchmarks to be executed
-//    iterations = 10 // Number of measurement iterations to do.
+    iterations = 5 // Number of measurement iterations to do.
 //    benchmarkMode = ['thrpt','ss'] // Benchmark mode. Available modes are: [Throughput/thrpt, AverageTime/avgt, SampleTime/sample, SingleShotTime/ss, All/all]
 //    batchSize = 1 // Batch size: number of benchmark method calls per operation. (some benchmark modes can ignore this setting)
 //    fork = 1 // How many times to forks a single benchmark. Use 0 to disable forking altogether
@@ -74,7 +77,7 @@ jmh {
 //    warmup = '1s' // Time to spend at each warmup iteration.
 //    warmupBatchSize = 3 // Warmup batch size: number of benchmark method calls per operation.
 //    warmupForks = 0 // How many warmup forks to make for a single benchmark. 0 to disable warmup forks.
-//    warmupIterations = 3 // Number of warmup iterations to do.
+    warmupIterations = 3 // Number of warmup iterations to do.
 //    warmupMode = 'INDI' // Warmup mode for warming up selected benchmarks. Warmup modes are: [INDI, BULK, BULK_INDI].
 //    warmupBenchmarks = ['.*Warmup'] // Warmup benchmarks to include in the run in addition to already selected. JMH will not measure these benchmarks, but only use them for the warmup.
 
