@@ -28,6 +28,13 @@ public class ProcedureCallOverheadTest {
     }
 
     @Test
+    public void testTrivialFunction() {
+        long result = Iterators.single(neo4j.getGraphDatabaseService().execute("RETURN org.neo4j.procedures.trivialFunction() as value").columnAs("value"));
+        assertEquals(5L, result);
+    }
+
+
+    @Test
     public void printQueryPlans() {
 
         Result result = neo4j.getGraphDatabaseService().execute("PROFILE MATCH (n:MyLabel) WHERE n.value=size('abcde') RETURN count(*) as result");
@@ -40,4 +47,12 @@ public class ProcedureCallOverheadTest {
 
 //        long result = Iterators.single(db..columnAs("result"));
     }
+
+    @Test
+    public void validateMultipleInvocationStatement() {
+
+        final long result = Iterators.single(neo4j.getGraphDatabaseService().execute("UNWIND range(1,10000) AS x RETURN sum(org.neo4j.procedures.trivialFunction()) as result").columnAs("result"));
+        assertEquals(10000*5l, result);
+    }
+
 }

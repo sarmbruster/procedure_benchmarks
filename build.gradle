@@ -2,6 +2,7 @@ plugins {
   id "me.champeau.gradle.jmh" version "0.4.5"
 }
 apply plugin: 'java'
+apply plugin: 'idea'
 
 sourceCompatibility=JavaVersion.VERSION_1_8
 targetCompatibility=JavaVersion.VERSION_1_8
@@ -15,7 +16,8 @@ repositories {
 
 ext {
 //    neo4jVersion = "3.1.7"
-    neo4jVersion = "3.3.3"
+    //neo4jVersion = "3.3.3"
+    neo4jVersion = "3.3.2-SNAPSHOT"
 //    neo4jVersion = "3.4.0-alpha07"
 }
 
@@ -58,6 +60,7 @@ jmh {
 //    failOnError = false // Should JMH fail immediately if any benchmark had experienced the unrecoverable error?
 //    forceGC = false // Should JMH force GC between iterations?
 //    jvm = 'myjvm' // Custom JVM to use when forking.
+    //jvmArgs = ['-XX:+UnlockCommercialFeatures', '-XX:+FlightRecorder','-XX:StartFlightRecording=delay=1s,duration=20s,name=Fixed,filename=/tmp/highcpu.jfr,settings=profile','-XX:FlightRecorderOptions=loglevel=info']
 //    jvmArgs = ['Custom JVM args to use when forking.']
 //    jvmArgsAppend = ['Custom JVM args to use when forking (append these)']
 //    jvmArgsPrepend =[ 'Custom JVM args to use when forking (prepend these)']
@@ -65,6 +68,7 @@ jmh {
 //    resultsFile = project.file("${project.buildDir}/reports/jmh/results.txt") // results file
 //    operationsPerInvocation = 10 // Operations per invocation.
 //    benchmarkParameters =  [:] // Benchmark parameters.
+    //profilers = ["stack",] // Use profilers to collect additional data. Supported profilers: [cl, comp, gc, stack, perf, perfnorm, perfasm, xperf, xperfasm, hs_cl, hs_comp, hs_gc, hs_rt, hs_thr]
 //    profilers = [] // Use profilers to collect additional data. Supported profilers: [cl, comp, gc, stack, perf, perfnorm, perfasm, xperf, xperfasm, hs_cl, hs_comp, hs_gc, hs_rt, hs_thr]
 //    timeOnIteration = '1s' // Time to spend at each measurement iteration.
 //    resultFormat = 'CSV' // Result format type (one of CSV, JSON, NONE, SCSV, TEXT)

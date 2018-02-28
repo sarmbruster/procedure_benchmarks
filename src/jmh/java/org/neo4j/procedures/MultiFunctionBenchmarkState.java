@@ -53,10 +53,10 @@ public class MultiFunctionBenchmarkState {
         }
     }
 
-    @Benchmark
+    /*@Benchmark
     public void testTrivialCypherStatement() {
         long result = Iterators.single(db.execute("MATCH (n:MyLabel) WHERE n.value=5 RETURN count(*) as result").columnAs("result"));
-    }
+    }*/
 
 /*
     @Benchmark
@@ -65,9 +65,18 @@ public class MultiFunctionBenchmarkState {
     }
 */
 
-    @Benchmark
+    /*@Benchmark
     public void testTrivialFunction() {
         long result = Iterators.single(db.execute("MATCH (n:MyLabel) WHERE n.value=org.neo4j.procedures.trivialFunction() RETURN count(*) as result").columnAs("result"));
+    }*/
+
+    @Benchmark
+    public void testMultipleInvocationFunction() {
+        long result = Iterators.single(db.execute("UNWIND range(0,10000) AS x RETURN sum(org.neo4j.procedures.trivialFunction()) as result").columnAs("result"));
     }
 
+    @Benchmark
+    public void baseline() {
+        double result = Iterators.single(db.execute("UNWIND range(0,10000) AS x RETURN sum(round(5.1)) as result").columnAs("result"));
+    }
 }
